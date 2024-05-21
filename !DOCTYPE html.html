@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+   
+    <title text-align="center">Advanced OSENT Tool</title>  
+    
+    <style>  
+        .head {
+            display: block;
+            text-align: center;
+            margin-top: 50px; 
+        }
+
+.image {
+            width: 50px; 
+            height: 50px; 
+            border-radius: 5px;
+        }
+
+        
+        .button-container {
+            display: grid; 
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 10px; 
+        }
+    .button-column {
+            display: inline-block; 
+            flex-direction: column; 
+            gap: 30px; 
+
+        }
+    
+        body {
+            background-color:rgb(191, 219, 234); 
+            
+            background-size: cover; 
+            background-position: center; 
+            background-repeat: no-repeat;  
+
+        
+        } 
+        .center-container {
+            display: flex;
+            justify-content: center; 
+            align-items: center; 
+            height: 75px; 
+        }
+        
+
+        .button {
+            width: 200px; 
+            height: 50px; 
+            padding: 5px; 
+            background-color: #007bff; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+            font-size: 12px; 
+            cursor: pointer;   
+            right: 10%; 
+            margin: 10px;
+            
+          
+        }
+    </style>
+
+    
+</head>
+
+<body>
+    <h1 class="head">Advanced OSINT Tool</h1> 
+    <div class="center-container">
+    <label for="searchQuery">Enter Search Query:</label>
+    <input type="enter url" id="searchQuery" name="searchQuery" size="50"> 
+
+        
+
+   </div>
+    <br>  
+     
+    <div class="container">
+    <div class="button-column">
+    <button onclick="searchGoogleIndex()" class = "button">  
+        
+        Search on Google (Index)  
+    </button> 
+     
+    <button onclick="searchGoogleFileTypes()" class = "button">Search on Google (File Types) </button>
+    <button onclick="searchGoogle()" class = "button">Database Files</button>
+    <button
+        onclick="searchFiles('inurl:wp- | inurl:wp-content | inurl:plugins | inurl:uploads | inurl:themes | inurl:download')" class = "button">Search
+        WordPress Files</button>
+    <button onclick="searchFiles('ext:log')" class = "button">Search Log Files</button>
+    <button onclick="searchFiles('ext:bkf | ext:bkp | ext:bak | ext:old | ext:backup')" class = "button">Search Backup Files</button>
+    <button onclick="searchFiles('inurl:login | inurl:signin | intitle:Login | intitle: signin | inurl:auth')" class = "button">Search
+        Login Pages</button>
+    <button onclick="searchDocuments()" class = "button">Publicly Exposed Documents</button>
+    <button onclick="searchPhpInfo()" class = "button" >Search PHP Info</button>
+    <button onclick="searchBackdoors()" class = "button">Search Backdoors</button>
+    <button onclick="searchFiles()" class = "button">Search Files</button>
+    <button onclick="searchErrors()" class = "button">Search Errors</button>
+    <button onclick="searchRedir()" class = "button">Search Redir</button>
+    <button onclick="searchExtensions()" class = "button">Search Extensions</button>
+    <button onclick="searchPastebin()" class = "button">Search Pastebin</button>
+    <button onclick="searchLinkedIn()" class = "button">Search LinkedIn</button>
+    <button onclick="searchSharepoint()" class = "button">Search Sharepoint</button>
+    <button onclick="searchWSDL()" class = "button">Search WSDL</button>
+    <button onclick="searchGitHub()"  class = "button">Search GitHub</button>
+    <button onclick="searchGist()" class = "button">Search Gist</button>
+    <button onclick="searchConfigFiles()" class = "button">Search Config Files</button>
+    <button onclick="searchCodeSharingSites()" class = "button">Search Code Sharing Sites</button>
+    <button onclick="searchGitFolders()" class = "button">Search Git Folders</button>
+    <button onclick="searchTraefikDashboard()" class = "button">Search Traefik Dashboard</button>
+    <button onclick="searchCrtSh()" class = "button">Search crt.sh</button>
+    <button onclick="searchPhpinfo()" class = "button">Search phpinfo.php and .htaccess</button>
+    <button onclick="searchSiteWildcard()" class = "button">Search Site (Wildcard)</button>
+    <button onclick="searchSubdomainWildcard()" class = "button">Search Subdomain (Wildcard)</button>
+    <button onclick="searchWordpressFiles()" class = "button">Search Wordpress Files</button>
+    <button onclick="searchWaybackMachine()" class = "button">Search Wayback Machine</button>
+    <button onclick="searchOpenBugBounty()" class = "button">Search Open Bug Bounty</button>
+    <button onclick="searchReddit()" class = "button">Search Reddit</button>
+    <button onclick="searchCrossDomainXML()" class = "button">Search for crossdomain.xml</button>
+    <button onclick="searchRobotsTxt()" class = "button">Search for robots.txt</button>
+    <button onclick="searchSecurityHeaders()" class = "button">Search Security Headers</button>
+    <button onclick="searchThreatCrowd()"class = "button">Search ThreatCrowd</button>
+    <button onclick="searchRiskIQ()" class = "button">Search RiskIQ</button>
+    <button onclick="searchSWF()" class = "button" >Search for SWF files</button>
+    <button onclick="searchSWF()"  class = "button">Search for SWF files</button>
+    <button onclick="searchYouTube()" class = "button">Search YouTube</button>
+    <button onclick="searchYandex()" class = "button">Search Yandex</button>
+    <button onclick="searchWaybackMachineSWF()" class = "button">Search Wayback Machine for SWF</button>
+    <button onclick="searchWaybackMachineFlash()" class = "button">Search Wayback Machine for Flash</button>
+    <button onclick="searchWaybackMachine()" class = "button">Search Wayback Machine</button>
+    <button onclick="searchReverseIP()" class = "button"> Search Reverse IP</button>
+    <button onclick="searchPublicWWW()" class = "button">Search PublicWWW</button>
+    <button onclick="searchCensysIPv4()"  class = "button">Search Censys IPv4</button>
+    <button onclick="searchCensysDomain()" class = "button">Search Censys Domain</button>
+    <button onclick="searchCensysCertificates()" class = "button">Search Censys Certificates</button>
+    <button onclick="searchShodan()" class = "button">Search Shodan</button>
+    <button onclick="searchCustomSearchEngine()" class = "button">Search Custom Search Engine</button>
+    <button onclick="searchThrowbin()" class = "button">Search Throwbin</button>
+    <button onclick="searchDomainEye()"class = "button">Search DomainEye</button>
+    <button onclick="searchGitlab()" class = "button">Search GitLab</button>
+    <button onclick="searchStackOverflow()"class = "button">Search Stack Overflow</button>
+    <button onclick="searchAmazonS3()" class = "button">Search Amazon S3</button>
+    <button onclick="searchDigitalOceanSpaces()" class = "button">Search DigitalOcean Spaces</button>
+    <button onclick="searchWhatCMS()" class = "button">Search WhatCMS</button>
+
+</div>
+</div>
+
+    
+
+    <script>
+        function searchGoogleIndex() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var encodedQuery = encodeURIComponent(searchQuery);
+            var googleUrl = "https://www.google.com/search?q=site:" + encodedQuery + "+intitle:index.of";
+            window.open(googleUrl, '_blank');
+        }
+
+        function searchGoogleFileTypes() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var encodedQuery = encodeURIComponent(searchQuery);
+            var googleUrl = "https://www.google.com/search?q=site:" + encodedQuery + "+ext:xml | ext:conf | ext:cnf | ext:reg | ext:inf | ext:rdp | ext:cfg | ext:txt | ext:ora | ext:ini";
+            window.open(googleUrl, '_blank');
+        }
+         
+        function searchGoogle() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var encodedQuery = encodeURIComponent(searchQuery);
+            var searchParams = " ext:sql | ext:dbf | ext:mdb";
+            var url = "https://www.google.com/search?q=site:" + encodedQuery + searchParams;
+            window.open(url, '_blank');
+        }
+        function searchFiles(searchParams) {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var encodedQuery = encodeURIComponent(searchQuery);
+            var url = "https://www.google.com/search?q=site:" + encodedQuery + " " + searchParams;
+            window.open(url, '_blank');
+        }
+        function searchFiles(searchParams) {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var encodedQuery = encodeURIComponent(searchQuery);
+            var url = "https://www.google.com/search?q=site:" + encodedQuery + " " + searchParams;
+            window.open(url, '_blank');
+        }
+        function searchFiles(searchParams) {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var encodedQuery = encodeURIComponent(searchQuery);
+            var url = "https://www.google.com/search?q=site:" + encodedQuery + " " + searchParams;
+            window.open(url, '_blank');
+        }
+        function searchFiles(searchParams) {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var encodedQuery = encodeURIComponent(searchQuery);
+            var url = "https://www.google.com/search?q=site:" + encodedQuery + " " + searchParams;
+            window.open(url, '_blank');
+        }
+        function searchDocuments() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var encodedQuery = encodeURIComponent(searchQuery);
+            var extensions = "ext:doc | ext:docx | ext:odt | ext:pdf | ext:rtf | ext:sxw | ext:psw | ext:ppt | ext:pptx | ext:pps | ext:csv";
+            var url = "https://www.google.com/search?q=site:" + encodedQuery + " " + extensions;
+            window.open(url, '_blank');
+        }
+        function searchPhpInfo() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var encodedQuery = encodeURIComponent(searchQuery);
+            var url = "https://www.google.com/search?q=site:" + encodedQuery + " ext:php intitle:phpinfo \"published by the PHP Group\"";
+            window.open(url, '_blank');
+        }
+
+
+        function searchBackdoors() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var encodedQuery = encodeURIComponent(searchQuery);
+            var url = "https://www.google.com/search?q=site:" + encodedQuery + " inurl:shell | inurl:backdoor | inurl:wso | inurl:cmd | shadow | passwd | boot.ini | inurl:backdoor";
+            window.open(url, '_blank');
+        }
+
+
+        function searchFiles() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var encodedQuery = encodeURIComponent(searchQuery);
+            var url = "https://www.google.com/search?q=site:" + encodedQuery + " inurl:readme | inurl:license | inurl:install | inurl:setup | inurl:config";
+            window.open(url, '_blank');
+        }
+
+
+        function searchErrors() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var encodedQuery = encodeURIComponent(searchQuery);
+            var url = "https://www.google.com/search?q=site:" + encodedQuery + " intext:\"sql syntax near\" | intext:\"syntax error has occurred\" | intext:\"incorrect syntax near\" | intext:\"unexpected end of SQL command\" | intext:\"Warning: mysql_connect()\" | intext:\"Warning: mysql_query()\" | intext:\"Warning: pg_connect()\"";
+            window.open(url, '_blank');
+        }
+        function searchRedir() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var encodedQuery = encodeURIComponent(searchQuery);
+            var url = "https://www.google.com/search?q=site:" + encodedQuery + " inurl:redir | inurl:url | inurl:redirect | inurl:return | inurl:src=http | inurl:r=http";
+            window.open(url, '_blank');
+        }
+
+        function searchExtensions() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var encodedQuery = encodeURIComponent(searchQuery);
+            var url = "https://www.google.com/search?q=site:" + encodedQuery + " ext:action | ext:struts | ext:do";
+            window.open(url, '_blank');
+        }
+
+        function searchPastebin() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var encodedQuery = encodeURIComponent(searchQuery);
+            var url = "https://www.google.com/search?q=site:pastebin.com " + encodedQuery;
+            window.open(url, '_blank');
+        }
+
+        function searchLinkedIn() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var encodedQuery = encodeURIComponent(searchQuery);
+            var url = "https://www.google.com/search?q=site:linkedin.com employees " + encodedQuery;
+            window.open(url, '_blank');
+        }
+
+        function searchSharepoint() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var encodedQuery = encodeURIComponent(searchQuery);
+            var url = "https://www.google.com/search?q=.sharepoint.com/_vti_bin/webpartpages/asmx -docs -msdn -mdsec site:" + encodedQuery;
+            window.open(url, '_blank');
+        }
+
+        function searchWSDL() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var encodedQuery = encodeURIComponent(searchQuery);
+            var url = "https://www.google.com/search?q=site:" + encodedQuery + " filetype:wsdl | filetype:WSDL | ext:svc | inurl:wsdl | Filetype: ?wsdl | inurl:asmx?wsdl | inurl:jws?wsdl | intitle:_vti_bin/sites.asmx?wsdl | inurl:_vti_bin/sites.asmx?wsdl";
+            window.open(url, '_blank');
+        }
+
+        function searchGitHub() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var encodedQuery = encodeURIComponent(searchQuery);
+            var url = "https://github.com/search?q=\"" + searchQuery + "\"";
+            window.open(url, '_blank');
+        }
+
+        function searchGist() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var encodedQuery = encodeURIComponent(searchQuery);
+            var url = "https://gist.github.com/search?q=*." + encodedQuery;
+            window.open(url, '_blank');
+        }
+
+        function searchConfigFiles() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var encodedQuery = encodeURIComponent(searchQuery);
+            var url = "https://www.google.com/search?q=site:" + encodedQuery + " filetype:config \"" + "apache" + "\"";
+            window.open(url, '_blank');
+        }
+
+        function searchCodeSharingSites() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var encodedQuery = encodeURIComponent(searchQuery);
+            var url = "https://www.google.com/search?q=site:http://ideone.com | site:http://codebeautify.org | site:http://codeshare.io | site:http://codepen.io | site:http://repl.it | site:http://justpaste.it | site:http://pastebin.com | site:http://jsfiddle.net | site:http://trello.com | site:*.atlassian.net | site:bitbucket.org " + "\"" + encodedQuery + "\"";
+            window.open(url, '_blank');
+        }
+
+        function searchGitFolders() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var encodedQuery = encodeURIComponent(searchQuery);
+            var url = "https://www.google.com/search?q=inurl:\"/.git\" " + "\"" + encodedQuery + "\" -github";
+            window.open(url, '_blank');
+        }
+
+
+        function searchTraefikDashboard() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var url = "https://www.google.com/search?q=intitle:traefik+inurl:8080/dashboard \"" + searchQuery + "\"";
+            window.open(url, '_blank');
+        }
+
+        function searchCrtSh() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var url = "https://crt.sh/?q=" + encodeURIComponent(searchQuery);
+            window.open(url, '_blank');
+        }
+
+        function searchPhpinfo() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var url = "https://www.google.com/search?q=site:" + encodeURIComponent(searchQuery) + " inurl:\"/phpinfo.php\" | inurl:\".htaccess\"";
+            window.open(url, '_blank');
+        }
+
+        function searchSiteWildcard() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var url = "https://www.google.com/search?q=site:*." + encodeURIComponent(searchQuery);
+            window.open(url, '_blank');
+        }
+
+        function searchSubdomainWildcard() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var url = "https://www.google.com/search?q=site:*.*." + encodeURIComponent(searchQuery);
+            window.open(url, '_blank');
+        }
+
+        function searchWordpressFiles() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var url = "https://www.google.com/search?q=site:" + encodeURIComponent(searchQuery) + " inurl:wp-content | inurl:wp-includes";
+            window.open(url, '_blank');
+        }
+
+        function searchWaybackMachine() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var url = "http://wwwb-dedup.us.archive.org:8083/cdx/search?url=" + encodeURIComponent(searchQuery) + "/&matchType=domain&collapse=digest&output=text&fl=original,timestamp&filter=urlkey:.*wp[-].*&limit=1000000&xx=";
+            window.open(url, '_blank');
+        }
+
+        function searchOpenBugBounty() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var url = "https://www.openbugbounty.org/search/?search=" + encodeURIComponent(searchQuery);
+            window.open(url, '_blank');
+        }
+
+        function searchReddit() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var url = "https://www.reddit.com/search/?q=" + encodeURIComponent(searchQuery);
+            window.open(url, '_blank');
+        }
+
+        function searchCrossDomainXML() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var url = "https://www.google.com/search?q=" + encodeURIComponent(searchQuery) + "/crossdomain.xml";
+            window.open(url, '_blank');
+        }
+
+        function searchRobotsTxt() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var url = "https://www.google.com/search?q=" + encodeURIComponent(searchQuery) + "/robots.txt";
+            window.open(url, '_blank');
+        }
+
+        function searchSecurityHeaders() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var url = "https://securityheaders.com/?q=" + encodeURIComponent(searchQuery) + "&followRedirects=on";
+            window.open(url, '_blank');
+        }
+
+        function searchThreatCrowd() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var url = "https://threatcrowd.org/domain.php?domain=" + encodeURIComponent(searchQuery);
+            window.open(url, '_blank');
+        }
+
+        function searchRiskIQ() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var url = "https://community.riskiq.com/search/" + encodeURIComponent(searchQuery);
+            window.open(url, '_blank');
+        }
+
+        function searchSWF() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var url = "https://www.google.com/search?q=inurl:" + encodeURIComponent(searchQuery) + " ext:swf";
+            window.open(url, '_blank');
+        }
+
+        function searchYouTube() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var url = "https://www.youtube.com/results?search_query=" + encodeURIComponent(searchQuery);
+            window.open(url, '_blank');
+        }
+
+        function searchYandex() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var url = "https://yandex.com/search/?text=site:" + encodeURIComponent(searchQuery) + "  mime:swf";
+            window.open(url, '_blank');
+        }
+
+        function searchWaybackMachineSWF() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var url = "https://web.archive.org/cdx/search?url=" + encodeURIComponent(searchQuery) + "/&matchType=domain&collapse=urlkey&output=text&fl=original&filter=urlkey:.*swf&limit=100000";
+            window.open(url, '_blank');
+        }
+
+        function searchWaybackMachineFlash() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var url = "https://web.archive.org/cdx/search?url=" + encodeURIComponent(searchQuery) + "/&matchType=domain&collapse=urlkey&output=text&fl=original&filter=mimetype:application/x-shockwave-flash&limit=100000";
+            window.open(url, '_blank');
+        }
+
+        function searchWaybackMachine() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var url = "https://web.archive.org/web/*/" + encodeURIComponent(searchQuery) + "/*";
+            window.open(url, '_blank');
+        }
+
+        function searchReverseIP() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var url = "https://viewdns.info/reverseip/?host=" + encodeURIComponent(searchQuery) + "&t=1";
+            window.open(url, '_blank');
+        }
+
+        function searchPublicWWW() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var url = "https://publicwww.com/websites/" + encodeURIComponent(searchQuery) + "/";
+            window.open(url, '_blank');
+        }
+
+        function searchCensysIPv4() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var url = "https://censys.io/ipv4?q=" + encodeURIComponent(searchQuery);
+            window.open(url, '_blank');
+        }
+
+        function searchCensysDomain() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var url = "https://censys.io/domain?q=" + encodeURIComponent(searchQuery);
+            window.open(url, '_blank');
+        }
+
+        function searchCensysCertificates() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var url = "https://censys.io/certificates?q=" + encodeURIComponent(searchQuery);
+            window.open(url, '_blank');
+        }
+
+        function searchShodan() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var url = "https://www.shodan.io/search?query=" + encodeURIComponent(searchQuery);
+            window.open(url, '_blank');
+        }
+
+        function searchCustomSearchEngine() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var url = "https://cse.google.com/cse?cx=002972716746423218710:veac6ui3rio#gsc.tab=0&gsc.q=" + encodeURIComponent(searchQuery);
+            window.open(url, '_blank');
+        }
+
+        function searchThrowbin() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var url = "https://www.google.com/search?q=site:throwbin.io " + encodeURIComponent(searchQuery);
+            window.open(url, '_blank');
+        }
+
+        function searchDomainEye() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var url = "https://domaineye.com/similar/" + encodeURIComponent(searchQuery);
+            window.open(url, '_blank');
+        }
+
+        function searchGitlab() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var url = "https://www.google.com/search?q=inurl:gitlab " + encodeURIComponent(searchQuery);
+            window.open(url, '_blank');
+        }
+
+        function searchStackOverflow() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var url = "https://www.google.com/search?q=site:stackoverflow.com \"" + encodeURIComponent(searchQuery) + "\"";
+            window.open(url, '_blank');
+        }
+
+        function searchAmazonS3() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var url = "https://www.google.com/search?q=site:.s3.amazonaws.com \"" + encodeURIComponent(searchQuery) + "\"";
+            window.open(url, '_blank');
+        }
+
+        function searchDigitalOceanSpaces() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var url = "https://www.google.com/search?q=site:digitaloceanspaces.com \"" + encodeURIComponent(searchQuery) + "\"";
+            window.open(url, '_blank');
+        }
+
+        function searchWhatCMS() {
+            var searchQuery = document.getElementById('searchQuery').value;
+            var url = "https://whatcms.org/?s=" + encodeURIComponent(searchQuery);
+            window.open(url, '_blank');
+        }
+    </script>
+</body>
+
+</html>
